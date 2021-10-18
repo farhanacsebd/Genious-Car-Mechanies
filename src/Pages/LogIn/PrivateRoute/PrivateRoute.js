@@ -4,13 +4,10 @@ import { Redirect, Route } from 'react-router';
 import { Spinner } from 'react-bootstrap';
 
 const PrivateRoute = ({ children, ...rest }) => {
-    const { isLoding } = useAuth();
-    if (isLoding) {
-        <Spinner animation="border" variant="secondary" />
-
+    const { user, isLoading } = useAuth();
+    if (isLoading) {
+        return <Spinner animation="border" variant="danger" />
     }
-    const user = JSON.parse(localStorage.getItem('user'))
-    console.log(user.email)
     return (
         <Route
             {...rest}
@@ -22,10 +19,10 @@ const PrivateRoute = ({ children, ...rest }) => {
             ></Redirect>
 
             }
-        ></Route>
+        >
+
+        </Route>
     );
-
-
 };
 
 export default PrivateRoute;
